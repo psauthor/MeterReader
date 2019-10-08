@@ -1,0 +1,35 @@
+{
+  "name": "readingapp",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "watch": "vue-cli-service build --mode Development --watch"
+  },
+  "dependencies": {
+    "axios": "0.19.0",
+    "bootstrap": "4.3.1",
+    "core-js": "^2.6.5",
+    "jquery": "3.4.1",
+    "jquery-validation": "1.19.1",
+    "jquery-validation-unobtrusive": "3.2.11",
+    "moment": "2.24.0",
+    "vee-validate": "3.0.8",
+    "vue": "^2.6.10",
+    "vue-router": "^3.0.3",
+    "vuex": "^3.0.1",
+    "vuex-persist": "^2.1.0",
+    "@fortawesome/fontawesome-free": "5.11.2"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.11.0",
+    "@vue/cli-service": "^3.11.0",
+    "vue-cli-plugin-source-dir": "^0.1.0",
+    "vue-template-compiler": "^2.6.10",
+    "gulp": "4.0.2",
+    "gulp-uglify": "3.0.2",
+    "gulp-concat": "2.6.1"
+  }
+, "-vs-binding":{"ProjectOpened":["watch"]}
+}

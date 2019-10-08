@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29318.209
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeterReaderWeb", "MeterReaderWeb\MeterReaderWeb.csproj", "{520FA4C6-F494-47DF-B661-9FE020F54725}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeterReaderLib", "MeterReaderLib\MeterReaderLib.csproj", "{555A439F-C31B-4B8B-B7B4-3D249AE78DC5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{3354F1FC-F5ED-4575-968E-00EDC820E357}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clients", "Clients", "{556BF8F4-270F-4B9C-BCE9-A8F78D4889BE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{520FA4C6-F494-47DF-B661-9FE020F54725}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{520FA4C6-F494-47DF-B661-9FE020F54725}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{520FA4C6-F494-47DF-B661-9FE020F54725}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{520FA4C6-F494-47DF-B661-9FE020F54725}.Release|Any CPU.Build.0 = Release|Any CPU
+		{555A439F-C31B-4B8B-B7B4-3D249AE78DC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{555A439F-C31B-4B8B-B7B4-3D249AE78DC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{555A439F-C31B-4B8B-B7B4-3D249AE78DC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{555A439F-C31B-4B8B-B7B4-3D249AE78DC5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{520FA4C6-F494-47DF-B661-9FE020F54725} = {3354F1FC-F5ED-4575-968E-00EDC820E357}
+		{555A439F-C31B-4B8B-B7B4-3D249AE78DC5} = {3354F1FC-F5ED-4575-968E-00EDC820E357}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {75381036-B329-40BB-8569-3CEF1FEFCF88}
+	EndGlobalSection
+EndGlobal
