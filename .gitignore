@@ -349,5 +349,3 @@ healthchecksdb
 MigrationBackup/
 
 
-**/wwwroot/lib/**/*
-**/wwwroot/app/**/*
