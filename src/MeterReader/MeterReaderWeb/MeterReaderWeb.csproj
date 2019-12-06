@@ -17,6 +17,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Protos\enums.proto" />
+    <None Remove="Protos\MeterReader.proto" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Grpc.AspNetCore" Version="2.25.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0" />
@@ -32,4 +38,8 @@
     <ProjectReference Include="..\MeterReaderLib\MeterReaderLib.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Protobuf Include="Protos\enums.proto" GrpcServices="None" />
+    <Protobuf Include="Protos\MeterReader.proto" GrpcServices="Server" />
+  </ItemGroup>
 </Project>

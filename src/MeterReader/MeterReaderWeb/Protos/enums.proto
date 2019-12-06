@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+option csharp_namespace = "MeterReaderWeb.Services";
+enum ReadingStatus{
+INVALID=0;
+SUCCESS=1;
+FAILURE=2;
+}
