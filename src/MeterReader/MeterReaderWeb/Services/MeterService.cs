@@ -8,12 +8,12 @@ namespace MeterReaderWeb.Services
 {
     public class MeterService : MeterReadingService.MeterReadingServiceBase
     {
-        private readonly ILogger<MeterService> logger;
+        private readonly ILogger<MeterService> _logger;
         private readonly IReadingRepository repository;
 
         public MeterService(ILogger<MeterService> logger, IReadingRepository repository)
         {
-            this.logger = logger;
+            this._logger = logger;
             this.repository = repository;
         }
 
@@ -34,19 +34,21 @@ namespace MeterReaderWeb.Services
                         var reading = new MeterReading()
                         {
                             Value = item.ReadingValue,
-                            ReadingDate = item.ReadingTime.ToDateTime()
+                            ReadingDate = item.ReadingTime.ToDateTime(),
+                            CustomerId = item.CustomerId,
                         };
                         repository.AddEntity(reading);
                     }
                     if (await repository.SaveAllAsync())
                     {
+                        _logger.LogError($"Stored {request.Readings.Count} New Readings....");
                         result.Successful = ReadingStatus.Success;
                     }
                 }
                 catch (System.Exception exception)
                 {
                     result.Message = exception.Message;
-                    logger.LogError($"Exception thrown during saving of readings: {exception}");
+                    _logger.LogError($"Exception thrown during saving of readings: {exception}");
                 }
             }
 

@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <UserSecretsId>dotnet-MeterReaderClient-D2821267-0EDA-4DD0-BC0B-6DE06BF763EE</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.9.1" />
+    <PackageReference Include="Grpc.Net.ClientFactory" Version="2.23.2" />
+    <PackageReference Include="Grpc.Tools" Version="2.23.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="..\MeterReaderWeb\Protos\enums.proto" GrpcServices="None">
+      <Link>Protos\enums.proto</Link>
+    </Protobuf>
+    <Protobuf Include="..\MeterReaderWeb\Protos\MeterReader.proto" GrpcServices="Client">
+      <Link>Protos\MeterReader.proto</Link>
+    </Protobuf>
+  </ItemGroup>
+</Project>
