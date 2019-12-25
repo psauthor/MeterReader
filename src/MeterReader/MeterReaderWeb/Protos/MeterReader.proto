@@ -9,8 +9,7 @@ import "google/protobuf/empty.proto";
 
 service MeterReadingService{
 	rpc AddReading(ReadingPacket) returns (StatusMessage);
-	rpc Test(google.protobuf.Empty) returns (google.protobuf.Empty);
-	rpc SendDiagnostics(stream ReadingPacket) returns(google.protobuf.Empty);
+	rpc SendDiagnostics(stream ReadingMessage) returns(google.protobuf.Empty);
 }
 
 message ReadingPacket{
