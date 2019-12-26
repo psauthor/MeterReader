@@ -17,7 +17,8 @@ namespace MeterReaderClient
         private readonly ReadingFactory _factory;
         private readonly ILoggerFactory _loggerFactory;
         private MeterReadingService.MeterReadingServiceClient _client;
-
+        private string _token;
+        private DateTime _expiration=DateTime.MinValue;
         public Worker(ILogger<Worker> logger, IConfiguration configuration, ReadingFactory factory,ILoggerFactory loggerFactory)
         {
             _logger = logger;
@@ -26,6 +27,7 @@ namespace MeterReaderClient
             _loggerFactory = loggerFactory;
         }
 
+        protected bool NeedsLogin() => string.IsNullOrWhiteSpace(_token) || _expiration > DateTime.UtcNow;
         private MeterReadingService.MeterReadingServiceClient Client
         {
             get
@@ -52,17 +54,17 @@ namespace MeterReaderClient
             {
                 counter++;
 
-                if (counter % 10 == 0)
-                {
-                    Console.WriteLine("sending diagnostics");
-                    var stream = Client.SendDiagnostics();
-                    for (int i = 0; i < 5; i++)
-                    {
-                        var reading = await _factory.Generate(customerId);
-                        await stream.RequestStream.WriteAsync(reading);
-                    }
-                    await stream.RequestStream.CompleteAsync();
-                }
+                //if (counter % 10 == 0)
+                //{
+                //    Console.WriteLine("sending diagnostics");
+                //    var stream = Client.SendDiagnostics();
+                //    for (int i = 0; i < 5; i++)
+                //    {
+                //        var reading = await _factory.Generate(customerId);
+                //        await stream.RequestStream.WriteAsync(reading);
+                //    }
+                //    await stream.RequestStream.CompleteAsync();
+                //}
                 _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
                 var packet = new ReadingPacket
                 {
@@ -77,11 +79,15 @@ namespace MeterReaderClient
 
                 try
                 {
-                    var result = await Client.AddReadingAsync(packet);
+                    if (!NeedsLogin()|| await GenerateToken())
+                    {
+                        var headers = new Metadata {{"Authorization", $"Bearer {_token}"}};
+                        var result = await Client.AddReadingAsync(packet,headers:headers);
 
-                    _logger.LogInformation(result.Successful == ReadingStatus.Success
-                        ? "Successfully sent"
-                        : "Failed to send");
+                        _logger.LogInformation(result.Successful == ReadingStatus.Success
+                            ? "Successfully sent"
+                            : "Failed to send");
+                    }
 
                 }
                 catch (RpcException e)
@@ -94,6 +100,25 @@ namespace MeterReaderClient
 
 
             }
+        }
+
+        private async Task<bool> GenerateToken()
+        {
+            var request=new TokenRequest
+            {
+                Username = _config["Service:username"],
+                Password = _config["Service:password"]
+            };
+            var response = await Client.CreateTokenAsync(request);
+            if (response.Success)
+            {
+                _token = response.Token;
+                _expiration = response.Expiration.ToDateTime();
+
+                return true;
+            }
+
+            return false;
         }
     }
 }

@@ -4,13 +4,51 @@ using MeterReaderWeb.Data;
 using MeterReaderWeb.Data.Entities;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
+using MeterReaderLib;
+using MeterReaderLib.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MeterReaderWeb.Services
 {
+  [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class MeterService : MeterReadingService.MeterReadingServiceBase
     {
         private readonly ILogger<MeterService> _logger;
         private readonly IReadingRepository repository;
+        private readonly JwtTokenValidationService _tokenValidationService;
+
+        public MeterService(ILogger<MeterService> logger, IReadingRepository repository, JwtTokenValidationService tokenValidationService)
+        {
+            this._logger = logger;
+            this.repository = repository;
+            _tokenValidationService = tokenValidationService;
+        }
+
+
+        [AllowAnonymous] public override async Task<TokenResponse> CreateToken(TokenRequest request, ServerCallContext context)
+        {
+            var creds=new CredentialModel
+            {
+                UserName = request.Username,
+                Passcode = request.Password
+            };
+            var response = await _tokenValidationService.GenerateTokenModelAsync(creds);
+
+            if (response.Success)
+            {
+                return new TokenResponse
+                {
+                    Token = response.Token,
+                    Expiration = Timestamp.FromDateTime(response.Expiration),
+                    Success = true
+                };
+            }
+            return new TokenResponse
+            {
+                Success = false
+            };
+        }
 
         public override async Task<Empty> SendDiagnostics(IAsyncStreamReader<ReadingMessage> requestStream, ServerCallContext context)
         {
@@ -28,11 +66,7 @@ namespace MeterReaderWeb.Services
             return new Empty();
         }
 
-        public MeterService(ILogger<MeterService> logger, IReadingRepository repository)
-        {
-            this._logger = logger;
-            this.repository = repository;
-        }
+       
 
         public override async Task<StatusMessage> AddReading(ReadingPacket request, ServerCallContext context)
         {
