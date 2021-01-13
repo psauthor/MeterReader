@@ -12,7 +12,7 @@
     "bootstrap": "4.3.1",
     "core-js": "^2.6.5",
     "jquery": "3.5.0",
-    "jquery-validation": "1.19.1",
+    "jquery-validation": "1.19.3",
     "jquery-validation-unobtrusive": "3.2.11",
     "moment": "2.24.0",
     "vee-validate": "3.0.8",
