@@ -3,23 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "watch": "vue-cli-service build --mode Development --watch"
   },
   "dependencies": {
-    "axios": "0.21.1",
     "bootstrap": "4.3.1",
     "jquery": "3.5.0",
     "jquery-validation": "1.19.3",
     "jquery-validation-unobtrusive": "3.2.11",
-    "moment": "2.24.0",
-    "@fortawesome/fontawesome-free": "5.11.2"
   },
   "devDependencies": {
     "gulp": "4.0.2",
     "gulp-uglify": "3.0.2",
     "gulp-concat": "2.6.1"
   }
-, "-vs-binding":{"ProjectOpened":["watch"]}
 }
