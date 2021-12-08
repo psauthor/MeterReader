@@ -1,4 +1,4 @@
-/// <binding Clean='minify' ProjectOpened='libs, minify' />
+/// <binding ProjectOpened='minify, libs' />
 const { src, dest, series } = require('gulp');
 const uglify = require('gulp-uglify');
 const concat = require('gulp-concat');

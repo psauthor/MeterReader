@@ -54,12 +54,14 @@ static void SetupMiddleware(WebApplication webApp)
     webApp.UseExceptionHandler("/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     webApp.UseHsts();
+    webApp.UseHttpsRedirection();
   }
 
-  webApp.UseHttpsRedirection();
   webApp.UseStaticFiles();
 
   webApp.UseRouting();
+
+  webApp.UseCors();
 
   webApp.UseAuthentication();
   webApp.UseAuthorization();
@@ -78,6 +80,16 @@ static void RegisterServices(WebApplicationBuilder bldr)
       cfg.TokenValidationParameters = new MeterReaderTokenValidationParameters(bldr.Configuration);
     });
 
+  bldr.Services.AddCors(cfg =>
+  {
+    cfg.AddDefaultPolicy(opt =>
+    {
+      opt.AllowAnyOrigin();
+      opt.AllowAnyMethod();
+      opt.AllowAnyHeader();
+    });
+  });
+  
   var connectionString = bldr.Configuration.GetConnectionString("DefaultConnection");
   bldr.Services.AddDbContext<ReadingContext>(options =>
       options.UseSqlServer(connectionString));

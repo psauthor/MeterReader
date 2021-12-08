@@ -4,10 +4,16 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "watch": "vue-tsc --noEmit && vite build --watch --mode development"
   },
   "dependencies": {
-    "vue": "^3.2.23"
+    "axios": "^0.24.0",
+    "moment": "^2.29.1",
+    "vee-validate": "^4.5.6",
+    "vue": "^3.2.23",
+    "vue-router": "^4.0.12",
+    "vuex": "^4.0.2",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.10.2",
