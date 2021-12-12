@@ -4,7 +4,7 @@
       <h2 class="text-center">Customers</h2>
       <div class="alert alert-warning" v-if="error">{{ error }}</div>
       <div class="col-8 offset-2 text-left">
-        <div class="table-responsive">
+        <div class="table-responsive table-sm">
           <table class="table">
             <thead>
               <tr>
@@ -22,8 +22,9 @@
               <tr
                 v-for="r in c.readings"
               >
-                <td colspan="2">
-                  <em>{{ date(r.readingDate, "MM/DD/YYYY hh:mm a") }}</em>
+              <td>&nbsp;</td>
+                <td>
+                  <small>&nbsp;&nbsp;{{ date(r.readingDate, "hh:mm a") }}</small>
                 </td>
                 <td><em>{{ r.value }}</em></td>
               </tr>
