@@ -95,7 +95,7 @@ static void RegisterServices(WebApplicationBuilder bldr)
       options.UseSqlServer(connectionString));
   bldr.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-  bldr.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+  bldr.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
       .AddEntityFrameworkStores<ReadingContext>();
 
   bldr.Services.AddScoped<IReadingRepository, ReadingRepository>();
