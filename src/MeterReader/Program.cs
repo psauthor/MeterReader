@@ -82,7 +82,7 @@ static void RegisterServices(WebApplicationBuilder bldr)
 
   bldr.Services.AddCors(cfg =>
   {
-    cfg.AddDefaultPolicy(opt =>
+    cfg.AddPolicy("AllowAll", opt =>
     {
       opt.AllowAnyOrigin();
       opt.AllowAnyMethod();
