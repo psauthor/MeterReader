@@ -2,7 +2,7 @@
 
  An example app for my Pluralsight course (Using gRPC in ASP.NET Core). The Course can be found at:
 
- > https://shawnl.ink/grpc
+ > https://shawnl.ink/grpc6
 
  ## Building the Example
 
