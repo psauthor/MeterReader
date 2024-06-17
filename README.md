@@ -1,7 +1,8 @@
-# MeterReader
- An example app for my Pluralsight course. The Course can be found at:
+# Starting Code for "Using gRPC in ASP.NET Core"
 
- > https://shawnl.ink/grpc6
+ An example app for my Pluralsight course (Using gRPC in ASP.NET Core). The Course can be found at:
+
+ > https://shawnl.ink/grpc
 
  ## Building the Example
 
