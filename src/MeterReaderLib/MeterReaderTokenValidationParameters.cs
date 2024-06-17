@@ -14,7 +14,7 @@ namespace MeterReaderLib
     {
       ValidIssuer = config["Tokens:Issuer"];
       ValidAudience = config["Tokens:Audience"];
-      IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Tokens:Key"]));
+      IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Tokens:Key"]!));
     }
   }
 }

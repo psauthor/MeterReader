@@ -33,7 +33,7 @@ namespace MeterReaderLib
 
     public async Task<TokenModel> GenerateTokenModelAsync(CredentialModel model)
     {
-      var user = await _userManager.FindByNameAsync(model.UserName);
+      var user = await _userManager.FindByNameAsync(model.UserName!);
       var result = new TokenModel()
       {
         Success = false
@@ -41,19 +41,19 @@ namespace MeterReaderLib
 
       if (user != null)
       {
-        var check = await _signInManager.CheckPasswordSignInAsync(user, model.Passcode, false);
+        var check = await _signInManager.CheckPasswordSignInAsync(user, model.Passcode!, false);
 
         if (check.Succeeded)
         {
           // Create the token
           var claims = new[]
           {
-            new Claim(JwtRegisteredClaimNames.Sub, user.Email),
+            new Claim(JwtRegisteredClaimNames.Sub, user.Email!),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName)
+            new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName!)
           };
 
-          var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Tokens:Key"]));
+          var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Tokens:Key"]!));
           var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
           var token = new JwtSecurityToken(
